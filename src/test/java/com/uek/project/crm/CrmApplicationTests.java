@@ -1,6 +1,5 @@
 package com.uek.project.crm;
 
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.alibaba.fastjson.JSONObject;
 import com.uek.project.crm.dao.IProductDao;
 import com.uek.project.crm.entity.Product;
 
@@ -24,10 +24,7 @@ public class CrmApplicationTests {
 	}
 	@Test
 	public void findProducts() {
-		List<Product> products = productDao.findAll();
-		for (Product product : products) {
-			System.out.println(product);
-		}
+		new JSONObject();
 	}
 
 }

@@ -16,6 +16,7 @@ public class Product  implements Serializable{
 	private String name;		//-- 产品名称
 	private double price;		//-- 产品单价
 	
+	
 	public Product(){}
 
 	public Product(String name, double price) {

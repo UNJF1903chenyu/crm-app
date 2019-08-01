@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_1309778_3p6hyapc9wr.css" >
+		<style>
+			li:hover{
+				color:red;
+			}
+		</style>
+		<title>Files UpLoad</title>
+	</head>
+<body>
+	<div id="uploadForm">
+		<!-- multiple属性定义该文件框可以输入多个值 -->
+		<input id="file" type="file" multiple="multiple">
+	
+		
+	</div>
+		<ul style="list-style:none">
+			<li th:each="category:${categories}">
+			<i class="iconfont icon-wenjianjia1"></i>
+			<a href="#" class="category" th:text="${category}">corejava	</a>
+			<button class="upload" type="button" >上传</button>				
+			</li>
+		</ul>
+		<iframe src="css/telegram.svg" style="baground:red;" width="50" height="50"></iframe>
+	<script type="text/javascript">
+		var length;
+		$('#file').change(function(){
+			length = this.files.length;
+		});
+	
+			var choose;
+			$(".upload").on("click",function(){
+				alert(1)
+				choose = $(this).parent().find("a").text();
+			var formData = new FormData();
+			for(let i=0;i<length;i++){
+				console.log(i)
+				console.log($('#file')[0].files[i])
+				formData.append('file',$('#file')[0].files[i]);
+			}
+			formData.append("apple",choose)
+			alert(choose)
+			console.log(formData.getAll("file"));
+			$.ajax({
+				url:'/crm/upload',
+				type:'post',
+				data:formData,
+				processData:false,
+				contentType:false,
+				success:function(data){
+					alert(data);
+				},
+				error:function(res){
+					alert('upload failure');
+				}
+			});
+			})
+		
+	</script>
+</body>
+</html>

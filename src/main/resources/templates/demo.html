@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8">
+	<title>Lemon Cloud</title>
+	</head>
+	<body>
+	<!-- 引入头部页面 -->
+	<div th:replace="~{head::header}"></div>
+	<div style="width:100%;height:500px;">Main Content</div>
+		<div th:replace="~{foot::footer}"></div>
+	<!-- 引入尾部页面 -->
+	</body>
+</html>
+
+<!-- 
+	100个页面
+	问题：(1)每个页面中都要写header部和footer部
+		  (2)把这个网站的头部和尾部都换了
+	网站：
+	  登录，注册页
+	  主模板
+	  详情页
+	  列表页
+ -->

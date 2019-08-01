@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Software List</title>
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_1309778_xwl9uxw8ljc.css">
+		<script src="js/jquery-3.4.1.js" th:src="@{/js/jquery-3.4.1.js}"></script>
+	</head>
+<body>
+	<h3 align="center">Uek Develop Tools DownLoad PlatForm</h3>
+	<hr color="red">
+	<div>
+		<p>category</p>
+		<ul style="list-style:none">
+			<li th:each="category:${categories}">
+			<i class="iconfont icon-wenjianjia1"></i>
+			<a href="#" class="category" th:text="${category}">corejava</a>
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		$(".category").click(function(){
+		
+			//-- 1.后台拿数据
+			//-- 获取客户端点击的分类信息
+			var directory = $(this).text().trim();
+			
+			var that = $(this).parent();
+
+			$.get("/crm/list/"+directory, function(data){
+			var jo = $.parseJSON(data);//-- json字符串再用JQuery转换成Json对象
+			//-- 3.构造UI
+			that.find("ul").remove();
+			let htmlCode = "<ul style='list-style:none'>";
+			for(var i in jo['files']){
+					htmlCode += "<li><a href=download/"+directory+"/"+jo['files'][i]+">"+jo['files'][i]+"</a><li>";
+			}
+			htmlCode +="</ul>"
+			that.append(htmlCode);
+			  });
+
+		});
+	</script>
+</body>
+</html>
