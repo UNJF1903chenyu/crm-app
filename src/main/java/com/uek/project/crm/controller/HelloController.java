@@ -25,6 +25,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.uek.project.crm.dao.IProductDao;
 import com.uek.project.crm.entity.Product;
+import com.uek.project.crm.service.impl.ProductServiceImpl;
+import com.uek.project.crm.service.prototype.IProductService;
 //import com.uek.project.crm.service.prototype.IProductService;
 
 /**
@@ -37,8 +39,9 @@ import com.uek.project.crm.entity.Product;
 public class HelloController {
 	@Autowired
 	private IProductDao productDao;
-	//@Autowired
-	//private IProductService prodService;
+
+	@Autowired
+	private IProductService prodService;
 
 	@RequestMapping("/hello")
 	@ResponseBody

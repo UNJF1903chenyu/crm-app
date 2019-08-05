@@ -8,6 +8,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.uek.project.crm.dao.IProductDao;
 import com.uek.project.crm.entity.Product;
 import com.uek.project.crm.service.prototype.IProductService;
@@ -24,7 +26,7 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	@Cacheable(value="chenb")
+	@Cacheable(value="chenyu")
 	public List<Product> getAllProductService() {
 	/*	List<Product> ps = null;
 		ps = (List<Product>)rt.opsForValue().get("estore-products");
@@ -35,6 +37,15 @@ public class ProductServiceImpl implements IProductService {
 		}
 		return ps;*/
 		return iProductDao.findAll();
+	}
+
+	@Override
+	@Cacheable(value="products",key="#pageNum+'_'+#pageSize")
+	public Page<Product> getProducts(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		Page<Product> data = (Page<Product>)iProductDao.findAll();
+		return data;
+		
 	}
 
 }

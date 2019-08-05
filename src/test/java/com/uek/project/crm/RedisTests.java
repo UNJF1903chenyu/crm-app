@@ -53,4 +53,11 @@ public class RedisTests {
 			System.out.println(product);
 		}
 	}
+	@Test
+	public void test06(){
+		List<Product> ps = productService.getProducts(2, 5);
+		for (Product product : ps) {
+			System.out.println(product);
+		}
+	}
 }

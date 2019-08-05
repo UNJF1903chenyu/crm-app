@@ -52,9 +52,11 @@ public class RedisConfig  extends CachingConfigurerSupport{
 		RedisSerializer<Object> jsonSerializer = new GenericJackson2JsonRedisSerializer();
 		RedisSerializationContext.SerializationPair<Object> pair = RedisSerializationContext.SerializationPair.fromSerializer(jsonSerializer);
 		//--2.初始化配置
-		RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
 		//-- 设置默认超过期时间是30秒
-		defaultCacheConfig.entryTtl(Duration.ofSeconds(30));
+		//-- 链式设置缓存过期时间
+		RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(30)).serializeValuesWith(pair);
+		//-- 设置默认超过期时间是30秒
+		
 		//-- 初始化RedisCacheManager
 		return new RedisCacheManager(redisCacheWriter,defaultCacheConfig);
 	
